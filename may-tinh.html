@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<input id = "display" >
+<br>
+
+<button onclick="clickNumber(1)">1</button>
+<button onclick="clickNumber(2)">2</button>
+<button onclick="clickNumber(3)">3</button>
+<br>
+
+<button onclick="clickOperator('+')">+</button>
+<button onclick="clickOperator('-')">-</button>
+<br>
+
+<button onclick="clickEqual()">=</button>
+<button onclick="reset()">AC</button>
+
+<script>
+    let display = document.getElementById("display");
+    
+    let isOperatorClicked = false;
+    let isEqualClicked = false;
+    
+    let operator = '';
+    let firstOperand;
+    let secondOperand;
+
+    function reset() {
+        isOperatorClicked = false;
+        isEqualClicked = false;
+        operator = '';
+        firstOperand = undefined;
+        secondOperand = undefined;
+        display.value = "";
+    }
+    
+    function clickNumber(number) {
+        if (isOperatorClicked == true ) {
+            firstOperand = display.value;
+            //console.log(firstOperand);
+
+            display.value = number;
+            isOperatorClicked = false;
+        }else {
+            display.value += number;
+            //alert(number);
+        }
+    }
+
+    function clickOperator(operatorValue) {
+        isOperatorClicked = true ;
+        operator = operatorValue;
+        isEqualClicked = false;
+    }
+    function clickEqual() {
+        if (isEqualClicked) {
+            firstOperand = parseInt(display.value);
+
+        }
+        else {
+            firstOperand = parseInt(firstOperand);
+            secondOperand = parseInt(display.value);
+
+        }
+        console.log('clickEqual' , firstOperand , secondOperand )
+
+        let result;
+
+        if ( operator === '+') {
+            result = firstOperand + secondOperand ;
+        }
+        else if ( operator === '-') {
+            result = firstOperand - secondOperand;
+
+        }
+        display.value = result;
+        isEqualClicked = true;
+
+    }
+
+
+    
+    
+</script>
+
+
+</body>
+</html>
